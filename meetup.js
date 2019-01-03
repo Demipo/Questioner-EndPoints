@@ -21,3 +21,9 @@ app.get('/api/v1/meetups', (request, response) => {
 		"meetups": db
 	});
 });
+
+
+
+
+
+app.listen(8000);

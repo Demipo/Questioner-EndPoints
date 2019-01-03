@@ -140,6 +140,52 @@ return response.status(200).send({
 });
 
 
+//.................QUESTIONS SECTION...................
+
+//Get all questions
+app.get('/api/v1/questions', (request, response) => {
+  response.status(200).send({
+    "status": 200,
+    "questions": questions_db
+  });
+});
+
+//Post a question
+app.post('/api/v1/questions', (request, response) => {
+
+//Throw error when title and(or) body field is empty
+if (!request.body.title) {
+  return response.status(400).send({
+    status: 400,
+    error: 'title is required'
+  });}
+if (!request.body.body) {
+   return response.status(400).send({
+    status: 400,
+    error: 'add some details to the question'
+  });}
+
+//Assign the entered value to todo object
+const question = {
+  user: request.body.user,
+  meetup: request.body.meetup,
+  title: request.body.title,
+  body: request.body.body,
+  upvote: 0,
+  downvote: 0
+};
+
+//Push the entered fields to question_db
+questions_db.push(question);
+ 
+//Return on success
+return response.status(200).send({
+  status: 200,
+  message: 'post was successful'});
+});
+
+
+
 
 
 app.listen(8000);

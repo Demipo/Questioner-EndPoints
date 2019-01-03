@@ -18,10 +18,33 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/api/v1/meetups', (request, response) => {
 	response.status(200).send({
 		"status": 200,
-		"meetups": db
+		"data": db
 	});
 });
 
+//Get upcoming meetups
+app.get('/api/v1/meetups/upcoming', (request, response) => {
+  //const now = new Date();
+  let upcoming_meetup = [];
+  db.map((upcoming) => {
+    if (new Date(upcoming.happeningOn) > new Date()){
+      upcoming_meetup.push(upcoming);
+    }
+  });
+
+  (upcoming_meetup)?
+
+    response.status(200).send({
+     "status": 200,
+      "data": upcoming_meetup
+    }):
+
+    response.status(400).send({
+      "status": 400,
+      "error": "No upcoming meetup"
+    });
+    
+});
 
 
 

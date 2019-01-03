@@ -109,7 +109,35 @@ return response.status(200).send({
 });
 
 
+//RSVP response to meetup
+app.post('/api/v1/meetups/:meetup_id/rsvp', (request, response) => {
+  const id = parseInt(request.params.meetup_id, 10);
 
+//Throw error when status field is empty
+if (!request.body.status) {
+  return response.status(400).send({
+    status: 400,
+    error: 'status is required'
+  });
+}
+
+//Assign the entered value to rsvp object
+const rsvp = {
+  meetup: id,
+  topic: request.body.topic,
+  status: request.body.status
+};
+
+///Push the entered fields to the rsvp_db
+rsvp_db.push(rsvp);
+ 
+//Return on success
+return response.status(200).send({
+  status: 200,
+  message: 'rsvp post was successful'
+});
+
+});
 
 
 

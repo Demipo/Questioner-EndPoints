@@ -46,6 +46,25 @@ app.get('/api/v1/meetups/upcoming', (request, response) => {
     
 });
 
+//Obtain a single meetup
+app.get('/api/v1/meetups/:meetup_id', (request, response) =>{ 
+  const id = parseInt(request.params.meetup_id, 10);
+  db.map((meetup) => {
+    if (meetup.id === id) {
+      return response.status(200).send({
+        status: 200,
+        data: meetup
+      });
+    }
+  });
+
+  return response.status(400).send({
+    status: 400,
+    error: 'No such meetup'
+  });
+
+});
+
 
 
 

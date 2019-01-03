@@ -66,6 +66,80 @@ app.get('/api/v1/meetups/:meetup_id', (request, response) =>{
 });
 
 
+//Post for a given meetup
+//let meetups = { data:[] };
+app.post('/api/v1/meetups', (request, response) => {
+ 
+//Throw error when location, happeningOn and(or) topic field is empty
+if (!request.body.location) {
+   return response.status(400).send({
+    status: 400,
+    error: 'location is required'
+  });}
+if (!request.body.happeningOn) {
+   return response.status(400).send({
+    status: 400,
+    error: 'date for meetup is required'
+  });}
+if (!request.body.topic) {
+   return response.status(400).send({
+    status: 400,
+    error: 'meetup topic is required'
+  });}
+
+//Assign the entered value to meetup object
+const meetup = {
+  id: db.length + 1,
+  createdOn: request.body.createdOn,
+  topic: request.body.topic,
+  location: request.body.location,
+  happeningOn: request.body.happeningOn,
+  tags: request.body.tags.split(",")
+};
+
+///Push the entered fields to the db
+db.push(meetup);
+ 
+//Return on success
+return response.status(200).send({
+  status: 200,
+  message: 'meetup post was successful'
+});
+
+});
+
+
+//RSVP response to meetup
+app.post('/api/v1/meetups/:meetup_id/rsvp', (request, response) => {
+  const id = parseInt(request.params.meetup_id, 10);
+
+//Throw error when status field is empty
+if (!request.body.status) {
+  return response.status(400).send({
+    status: 400,
+    error: 'status is required'
+  });
+}
+
+//Assign the entered value to rsvp object
+const rsvp = {
+  meetup: id,
+  topic: request.body.topic,
+  status: request.body.status
+};
+
+///Push the entered fields to the rsvp_db
+rsvp_db.push(rsvp);
+ 
+//Return on success
+return response.status(200).send({
+  status: 200,
+  message: 'rsvp post was successful'
+});
+
+});
+
+
 
 
 app.listen(8000);

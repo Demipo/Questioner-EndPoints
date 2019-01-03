@@ -66,6 +66,52 @@ app.get('/api/v1/meetups/:meetup_id', (request, response) =>{
 });
 
 
+//Post for a given meetup
+//let meetups = { data:[] };
+app.post('/api/v1/meetups', (request, response) => {
+ 
+//Throw error when location, happeningOn and(or) topic field is empty
+if (!request.body.location) {
+   return response.status(400).send({
+    status: 400,
+    error: 'location is required'
+  });}
+if (!request.body.happeningOn) {
+   return response.status(400).send({
+    status: 400,
+    error: 'date for meetup is required'
+  });}
+if (!request.body.topic) {
+   return response.status(400).send({
+    status: 400,
+    error: 'meetup topic is required'
+  });}
+
+//Assign the entered value to meetup object
+const meetup = {
+  id: db.length + 1,
+  createdOn: request.body.createdOn,
+  topic: request.body.topic,
+  location: request.body.location,
+  happeningOn: request.body.happeningOn,
+  tags: request.body.tags.split(",")
+};
+
+///Push the entered fields to the db
+db.push(meetup);
+ 
+//Return on success
+return response.status(200).send({
+  status: 200,
+  message: 'meetup post was successful'
+});
+
+});
+
+
+
+
+
 
 
 app.listen(8000);

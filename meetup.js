@@ -1,26 +1,24 @@
 import express from 'express';
-import db from './db/db';
-import questions_db from './db/questions_db';
-import rsvp_db from './db/rsvp_db';
 import bodyParser from 'body-parser';
 
-const PORT = process.env.PORT || 8000;
 const app = express();
+//Data structure as db
+let db = [];
+let questions_db = [];
+let rsvp_db = [];
 
 //Parse incoming request data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 //..................MEETUP SECTION...................
-
 
 //To get all meetups
 app.get('/api/v1/meetups', (request, response) => {
-	response.status(200).send({
-		"status": 200,
-		"data": db
-	});
+  response.status(200).send({
+    "status": 200,
+    "data": db
+  });
 });
 
 //Get upcoming meetups
@@ -46,7 +44,7 @@ app.get('/api/v1/meetups/upcoming', (request, response) => {
     });
     
 });
-
+  
 //Obtain a single meetup
 app.get('/api/v1/meetups/:meetup_id', (request, response) =>{ 
   const id = parseInt(request.params.meetup_id, 10);
@@ -66,7 +64,6 @@ app.get('/api/v1/meetups/:meetup_id', (request, response) =>{
 
 });
 
-
 //Post for a given meetup
 //let meetups = { data:[] };
 app.post('/api/v1/meetups', (request, response) => {
@@ -76,7 +73,7 @@ if (!request.body.location) {
    return response.status(400).send({
     status: 400,
     error: 'location is required'
-  });}
+  });} 
 if (!request.body.happeningOn) {
    return response.status(400).send({
     status: 400,
@@ -109,8 +106,16 @@ return response.status(200).send({
 
 });
 
-
 //RSVP response to meetup
+
+//To get all rsvp
+app.get('/api/v1/rsvps', (request, response) => {
+  response.status(200).send({
+    "status": 200,
+    "data": rsvp_db
+  });
+});
+
 app.post('/api/v1/meetups/:meetup_id/rsvp', (request, response) => {
   const id = parseInt(request.params.meetup_id, 10);
 
@@ -185,5 +190,5 @@ return response.status(200).send({
   message: 'post was successful'});
 });
 
-
+const PORT = 8800;
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

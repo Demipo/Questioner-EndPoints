@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //..................MEETUP SECTION...................
 
 //To get all meetups
-app.get('/api/v1/meetups', (request, response) => {
+app.get('https://demipo.github.io/api/v1/meetups', (request, response) => {
   response.status(200).send({
     "status": 200,
     "data": db

@@ -2,10 +2,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 const app = express();
+
 //Data structure as db
 let db = [];
 let questions_db = [];
 let rsvp_db = [];
+
 
 //Parse incoming request data
 app.use(bodyParser.json());
@@ -20,6 +22,7 @@ app.get('/api/v1/meetups', (request, response) => {
     "data": db
   });
 });
+
 
 //Get upcoming meetups
 app.get('/api/v1/meetups/upcoming', (request, response) => {
@@ -103,11 +106,9 @@ return response.status(200).send({
   status: 200,
   message: 'meetup post was successful'
 });
-
 });
 
 //RSVP response to meetup
-
 //To get all rsvp
 app.get('/api/v1/rsvps', (request, response) => {
   response.status(200).send({
@@ -116,6 +117,7 @@ app.get('/api/v1/rsvps', (request, response) => {
   });
 });
 
+//Post an RSVP
 app.post('/api/v1/meetups/:meetup_id/rsvp', (request, response) => {
   const id = parseInt(request.params.meetup_id, 10);
 
@@ -144,7 +146,6 @@ return response.status(200).send({
 });
 
 });
-
 
 //.................QUESTIONS SECTION...................
 
@@ -190,5 +191,5 @@ return response.status(200).send({
   message: 'post was successful'});
 });
 
-const PORT = 8800;
+const PORT = process.env.PORT || 8800;
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

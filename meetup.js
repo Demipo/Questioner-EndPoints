@@ -1,9 +1,10 @@
-const express = require('express');
+import express from 'express';
 import db from './db/db';
 import questions_db from './db/questions_db';
 import rsvp_db from './db/rsvp_db';
 import bodyParser from 'body-parser';
 
+const PORT = process.env.PORT || 8000;
 const app = express();
 
 //Parse incoming request data
@@ -185,7 +186,4 @@ return response.status(200).send({
 });
 
 
-
-
-
-app.listen(8000);
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

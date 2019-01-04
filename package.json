@@ -5,7 +5,7 @@
   "main": "meetup.js",
   "scripts": {
     "test": "node ./spec/meetup_spec.js",
-    "start": "node_modules/.bin/nodemon meetup.js --exec babel-node --",
+    "start": "node meetup.js",
     "coverage": "`npm bin`/istanbul cover ./spec/meetup_spec.js",
     "coveralls": "istanbul cover jasmine-node --captureExceptions test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
@@ -26,6 +26,7 @@
     "babel-preset-es2015": "^6.24.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "grunt-exec": "^3.0.0",
     "istanbul": "^0.4.5",
     "jasmine": "^3.3.1",
     "jasmine-node": "^2.0.1",

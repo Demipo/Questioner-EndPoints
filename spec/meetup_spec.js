@@ -10,21 +10,18 @@ describe("meetup", () => {
 		});
 	});
 
-	it ("should return the meetups", (done) => {
-		request.get(url, (error, response, body) => {
-			expect(body).toBe(get_meetups);
-            done();
-		});
-	});
-
-	it ("it should  fail if location is undefined", (done) => {
-		request.post(url, post_meetup, (error, response) => {
-			expect(post_meetup.location).not.toBeUndefined();
-            done();
-		});
-	});
 });
 
 //Test to GET one meetup
+const url1 = "https://localhost:8000/api/v1/meetups";
+describe("meetup", () => {
+	it ("should return status code 200", (done) => {
+		request.get(url1, (error, response, body) => {
+			expect(url1).toBe();
+               done();
+		});
+	});
+
+});
 
 //Test to POST one meetup

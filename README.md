@@ -6,4 +6,3 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/fc840efdadcdda415249/maintainability)](https://codeclimate.com/github/Demipo/meetup-endpoints/maintainability)
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/fc840efdadcdda415249/test_coverage)](https://codeclimate.com/github/Demipo/meetup-endpoints/test_coverage)

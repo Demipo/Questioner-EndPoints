@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 import db from './db/db';
 import questions_db from './db/questions_db';
 import rsvp_db from './db/rsvp_db';

@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //Trying an entry point 
 app.get('/', (request, response) => {
-  response.send("You are live on MEETUP SERVER");
+  response.send("You are live on MEETUP SERVER")});
 
 //To get all meetups
 app.get('/api/v1/meetups', (request, response) => {

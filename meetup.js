@@ -127,6 +127,7 @@ app.get('/api/v1/rsvps', (request, response) => {
   });
 });
 
+//Post an RSVP
 app.post('/api/v1/meetups/:meetup_id/rsvp', (request, response) => {
   const id = parseInt(request.params.meetup_id, 10);
 
@@ -202,5 +203,5 @@ return response.status(200).send({
 });
 
 
-const PORT = 8888;
+const PORT = process.env.PORT || 8800;
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

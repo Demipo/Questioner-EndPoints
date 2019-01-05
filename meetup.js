@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+
 const app = express();
 
 //Data structure as db
@@ -13,8 +14,12 @@ let rsvp_db = [];
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
 //..................MEETUP SECTION...................
 
+app.get('/', (request, response) => {
+  response.send("..........Welcome to the QUESTIONER SERVER...........");
+});
 //To get all meetups
 app.get('/api/v1/meetups', (request, response) => {
   response.status(200).send({
@@ -48,6 +53,7 @@ app.get('/api/v1/meetups/upcoming', (request, response) => {
     
 });
   
+
 //Obtain a single meetup
 app.get('/api/v1/meetups/:meetup_id', (request, response) =>{ 
   const id = parseInt(request.params.meetup_id, 10);
@@ -106,9 +112,13 @@ return response.status(200).send({
   status: 200,
   message: 'meetup post was successful'
 });
+
 });
 
+
 //RSVP response to meetup
+
+
 //To get all rsvp
 app.get('/api/v1/rsvps', (request, response) => {
   response.status(200).send({
@@ -117,7 +127,6 @@ app.get('/api/v1/rsvps', (request, response) => {
   });
 });
 
-//Post an RSVP
 app.post('/api/v1/meetups/:meetup_id/rsvp', (request, response) => {
   const id = parseInt(request.params.meetup_id, 10);
 
@@ -146,6 +155,7 @@ return response.status(200).send({
 });
 
 });
+
 
 //.................QUESTIONS SECTION...................
 
@@ -191,5 +201,6 @@ return response.status(200).send({
   message: 'post was successful'});
 });
 
-const PORT = process.env.PORT || 8800;
+
+const PORT = 8888;
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

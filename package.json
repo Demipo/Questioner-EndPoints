@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Project Meetup",
   "main": "meetup.js",
+  "engines":{
+    "node": "v10.15.0",
+    "npm": "6.4.1"
+
+   },
   "scripts": {
     "test": "node ./spec/meetup_spec.js",
     "start": "node meetup.js",

@@ -15,6 +15,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //..................MEETUP SECTION...................
 
+//Trying an entry point 
+app.get('/', (request, response) => {
+  response.send({
+    console.log("You are live on MEETUP SERVER")
+});
+
 //To get all meetups
 app.get('/api/v1/meetups', (request, response) => {
   response.status(200).send({

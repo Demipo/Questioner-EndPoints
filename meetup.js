@@ -8,11 +8,9 @@ let db = [];
 let questions_db = [];
 let rsvp_db = [];
 
-
 //Parse incoming request data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 
 //..................USER SECTION...................
 //To get all users
@@ -96,9 +94,11 @@ return response.status(200).send({
 
 });
 
-
 //..................MEETUP SECTION...................
 
+app.get('/', (request, response) => {
+  response.send("..........Welcome to the QUESTIONER SERVER...........");
+});
 //To get all meetups
 app.get('/api/v1/meetups', (request, response) => {
   response.status(200).send({
@@ -106,7 +106,6 @@ app.get('/api/v1/meetups', (request, response) => {
     "data": db
   });
 });
-
 
 //Get upcoming meetups
 app.get('/api/v1/meetups/upcoming', (request, response) => {
@@ -190,6 +189,7 @@ return response.status(200).send({
   status: 200,
   message: 'meetup post was successful'
 });
+
 });
 
 //RSVP response to meetup
@@ -274,6 +274,7 @@ return response.status(200).send({
   status: 200,
   message: 'post was successful'});
 });
+
 
 const PORT = process.env.PORT || 8800;
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

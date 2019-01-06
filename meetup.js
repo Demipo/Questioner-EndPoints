@@ -13,6 +13,90 @@ let rsvp_db = [];
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+//..................USER SECTION...................
+//To get all users
+app.get('/api/v1/users', (request, response) => {
+  response.status(200).send({
+    "status": 200,
+    "data": user_db
+  });
+});
+
+//To get a single user
+app.get('/api/v1/users/:user_id', (request, response) =>{ 
+  const id = parseInt(request.params.user_id, 10);
+  user_db.map((user) => {
+    if (user.id === id) {
+      return response.status(200).send({
+        status: 200,
+        data: user
+      });
+    }
+  });
+
+  return response.status(400).send({
+    status: 400,
+    error: 'User does not exist'
+  });
+
+});
+
+//Post a user
+app.post('/api/v1/users', (request, response) => {
+ 
+//Throw error when location, happeningOn and(or) topic field is empty
+if (!request.body.firstname) {
+   return response.status(400).send({
+    status: 400,
+    error: 'first name is required'
+  });} 
+if (!request.body.lastname) {
+   return response.status(400).send({
+    status: 400,
+    error: 'last name is required'
+  });}
+if (!request.body.email) {
+   return response.status(400).send({
+    status: 400,
+    error: 'email is required'
+  });}
+if (!request.body.phoneNumber) {
+   return response.status(400).send({
+    status: 400,
+    error: 'phone number is required'
+  });}
+if (!request.body.username) {
+   return response.status(400).send({
+    status: 400,
+    error: 'user name is required'
+  });}
+
+//Assign the entered value to meetup object
+const user = {
+  id: user_db.length + 1,
+  firstname: request.body.firstname,
+  lastname: request.body.lastname,
+  othername: request.body.othername,
+  email: request.body.email,
+  phoneNumber: request.body.phoneNumber,
+  username: request.body.username,
+  registered: request.body.registered,
+  isAdmin: request.body.isAdmin
+};
+
+///Push the entered fields to the db
+user_db.push(user);
+ 
+//Return on success
+return response.status(200).send({
+  status: 200,
+  message: 'users post was successful'
+});
+
+});
+
+
 //..................MEETUP SECTION...................
 
 //To get all meetups

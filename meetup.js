@@ -7,10 +7,8 @@ const app = express();
 let db = [];
 let questions_db = [];
 let rsvp_db = [];
-<<<<<<< HEAD
 let user_db = [];
-=======
->>>>>>> 3b1cabf491493b1ee8eb1b22406f31eaff4fa212
+
 
 //Parse incoming request data
 app.use(bodyParser.json());
@@ -278,7 +276,6 @@ return response.status(200).send({
   message: 'post was successful'});
 });
 
-<<<<<<< HEAD
 /*
 //Patch Upvote and Downvote
 //For Upvote
@@ -327,8 +324,6 @@ return response.status(200).send({
 
 });
 */
-=======
->>>>>>> 3b1cabf491493b1ee8eb1b22406f31eaff4fa212
 
 const PORT = process.env.PORT || 8800;
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

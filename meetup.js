@@ -7,6 +7,10 @@ const app = express();
 let db = [];
 let questions_db = [];
 let rsvp_db = [];
+<<<<<<< HEAD
+let user_db = [];
+=======
+>>>>>>> 3b1cabf491493b1ee8eb1b22406f31eaff4fa212
 
 //Parse incoming request data
 app.use(bodyParser.json());
@@ -262,8 +266,7 @@ const question = {
   meetup: request.body.meetup,
   title: request.body.title,
   body: request.body.body,
-  upvote: 0,
-  downvote: 0
+  vote: 0
 };
 
 //Push the entered fields to question_db
@@ -275,6 +278,57 @@ return response.status(200).send({
   message: 'post was successful'});
 });
 
+<<<<<<< HEAD
+/*
+//Patch Upvote and Downvote
+//For Upvote
+app.patch('api/v1/questions/:id/upvote', (request, response) => {
+ const question_id = parseInt(request.params.id, 10);
+  questions_db.map((question) => {
+    if (question.id === question_id){
+      const voteplus = question.vote;
+      [
+        {
+          "op": "replace",
+          "path": "questions_db/questions/question_id/upvote",
+          "value": voteplus + 1
+        }
+      ]
+      
+    }
+  });
+
+return response.status(200).send({
+  status: 200,
+  message: 'post was successful'});
+
+});
+
+//For Downvote  
+app.patch('api/v1/questions/:id/upvote', (request, response) => {
+ const question_id = parseInt(request.params.id, 10);
+  questions_db.map((question) => {
+    if (question.id === question_id){
+      const voteminus = question.vote;
+      [
+        {
+          "op": "replace",
+          "path": "questions_db/questions/question_id/upvote",
+          "value": voteminus + 1
+        }
+      ]
+      
+    }
+  });
+
+return response.status(200).send({
+  status: 200,
+  message: 'post was successful'});
+
+});
+*/
+=======
+>>>>>>> 3b1cabf491493b1ee8eb1b22406f31eaff4fa212
 
 const PORT = process.env.PORT || 8800;
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

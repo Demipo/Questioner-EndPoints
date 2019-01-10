@@ -1,1 +1,1 @@
-web: node meetup.js
+web: node sever.js
